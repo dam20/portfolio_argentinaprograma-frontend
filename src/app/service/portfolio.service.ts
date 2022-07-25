@@ -52,7 +52,8 @@ export class PortfolioService {
 
   addProject(id: number, body: any): Observable<any> {
     return this.http.post<any>(this.url + 'person/new/project/' + id, body);  }
-  deleteProject(id: number, body: any): Observable<any> {
+  
+    deleteProject(id: number, body: any): Observable<any> {
     return this.http.post<any>(
       this.url + 'person/delete/project/' + id,
       body

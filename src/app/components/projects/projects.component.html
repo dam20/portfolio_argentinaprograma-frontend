@@ -6,11 +6,8 @@
     </div>
   </div>
   <div class="achivements">
-    <h3>{{ person.projects.length }}</h3>
+    <h3>{{ person.projects.length }} Proyectos</h3>
     <div>
-      <div class="project-title">
-        <h3>Proyectos</h3>
-      </div>
       <div>
         <ul class="project-list">
           <div class="row row-cols-4 gx-5">
@@ -20,8 +17,7 @@
                 <button type="button" class="btn">
                   {{ project.name }}
                 </button>
-                <a class="btn btn-top"><i class="fa fa-minus-circle" data-bs-toggle="modal"
-                    (click)="deleteProjectModal(person.id, project)"></i></a>
+                <a class="btn btn-top"><i class="fa fa-minus-circle" data-bs-toggle="modal" (click)="deleteProjectModal(person.id, project)"></i></a>
               </div>
             </li>
           </div>
