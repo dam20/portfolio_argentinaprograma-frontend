@@ -1,0 +1,61 @@
+<div class="card mat-card">
+  <div class="card-titles">
+    <h2>Proyectos</h2>
+    <div class="btn-edit">
+      <a class="btn-right"><i class="fa fa-plus" data-bs-toggle="modal" data-bs-target="#newAch"></i></a>
+    </div>
+  </div>
+  <div class="achivements">
+    <h3>{{ person.projects.length }}</h3>
+    <div>
+      <div class="project-title">
+        <h3>Proyectos</h3>
+      </div>
+      <div>
+        <ul class="project-list">
+          <div class="row row-cols-4 gx-5">
+            <li *ngFor="let project of person.projects">
+              <br />
+              <div class="col">
+                <button type="button" class="btn">
+                  {{ project.name }}
+                </button>
+                <a class="btn btn-top"><i class="fa fa-minus-circle" data-bs-toggle="modal"
+                    (click)="deleteProjectModal(person.id, project)"></i></a>
+              </div>
+            </li>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Nuevos projects -->
+<div class="modal fade" id="newAch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Proyecto</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputAch">Nombre del Proyecto</label>
+          <input type="text" class="form-control" id="inputAch" placeholder="Ingrese el Nombre del Proyecto"
+            [(ngModel)]="modalData.name" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button type="button" class="btn btn-primary" (click)="addNewProjectModal(person.id)">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

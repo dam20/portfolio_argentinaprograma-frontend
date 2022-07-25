@@ -1,0 +1,92 @@
+<div class="card mat-card">
+  <div id="experience">
+    <div class="card-titles">
+      <h2>Experiencia</h2>
+      <div class="btn-edit">
+        <a class="btn-right"><i class="fa fa-plus" data-bs-toggle="modal" data-bs-target="#newExp"></i></a>
+      </div>
+    </div>
+    <div>
+      <ul class="items-list" id="expList">
+        <li *ngFor="let experience of person.experiences">
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="col container-fluid">
+              <div class="row justify-content-md-right">
+                <a class="d-flex flex-row-reverse"><i class="fa fa-minus-circle"
+                    (click)="deleteXp(person.id, experience)"></i></a>
+              </div>
+              <div class="row container-fluid">
+                <div class="col-md-4">
+                  <img src="{{
+                        experience.imagen! ? experience.imagen : defoultImage
+                      }}" class="card-img" alt="Colocar Imagen URL" />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ experience.position }}</h5>
+                    <h5 class="card-title">{{ experience.company }}</h5>
+                    <p class="card-text">
+                      <small class="text-muted">Desde: {{ experience.startDate }} Hasta:
+                        {{ experience.endDate }}</small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Nueva experience -->
+<div class="modal fade" id="newExp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          Nueva Experiencia Laboral
+        </h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputPositionExp">Posicion</label>
+          <input type="text" class="form-control" id="inputPositionExp"
+            placeholder="Ingrese el puesto en el que se desempeña/o" [(ngModel)]="modalData.position" />
+        </div>
+        <div class="form-group">
+          <label for="inputCompanyExp">Compania</label>
+          <input type="text" class="form-control" id="inputCompanyExp"
+            placeholder="Ingrese la empresa en la que trabaja/o" [(ngModel)]="modalData.company" />
+        </div>
+        <div class="form-group">
+          <label for="inputImgExp">Imagen</label>
+          <input type="text" class="form-control" id="inputImgExp" placeholder="Ingrese una imagen o logo de la empresa"
+            [(ngModel)]="modalData.image" />
+        </div>
+        <div class="form-group">
+          <label for="inputInitialExp">Fecha Inicio</label>
+          <input type="text" class="form-control" id="inputInitialExp" placeholder="Ingrese la fecha de inicio"
+            [(ngModel)]="modalData.startDate" />
+        </div>
+        <div class="form-group">
+          <label for="inputEndExp">Fecha Fin</label>
+          <input type="text" class="form-control" id="inputEndExp" placeholder="Ingrese la fecha de finalizacion"
+            [(ngModel)]="modalData.endDate" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button type="button" class="btn btn-primary" (click)="addNewXpModal(person.id)">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

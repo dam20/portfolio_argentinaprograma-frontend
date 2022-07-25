@@ -1,0 +1,99 @@
+<div class="card mat-card">
+  <div id="education">
+    <div class="card-titles">
+      <h2>Educación</h2>
+      <div class="btn-edit">
+        <a class="btn-right"><i class="fa fa-plus" data-bs-toggle="modal" data-bs-target="#newEdu"></i></a>
+      </div>
+    </div>
+    <div>
+      <ul class="items-list" id="eduList">
+        <li *ngFor="let education of person.educations">
+          <div class="card mb-3" style="max-width: 540px">
+            <div class="col container-fluid">
+              <div class="row justify-content-md-right">
+                <a class="d-flex flex-row-reverse"><i class="fa fa-minus-circle"
+                    (click)="deleteEducation(person.id, education)"></i></a>
+              </div>
+              <div class="row container-fluid">
+                <div class="col-md-4">
+                  <img [src]="education.image! ? education.image : defaultImage" class="card-img" alt="Colocar Imagen URL" />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ education.title }}</h5>
+                    <h5 class="card-title">{{ education.school }}</h5>
+                    <h5 class="card-title">{{ education.gpa }}</h5>
+                    <p class="card-text">
+                      <small class="text-muted">Desde: {{ education.startDate }} Hasta:
+                        {{ education.endDate }}</small>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Modal new education -->
+<div class="modal fade" id="newEdu" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar education</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputSchool">Institucion</label>
+          <input type="text" class="form-control" id="inputSchool" placeholder="Ingrese Universidad/Escuela/Academia"
+            [(ngModel)]="modalData.school" />
+        </div>
+        <div class="form-group">
+          <label for="inputTitle">Titulo</label>
+          <input type="text" class="form-control" id="inputTitle" placeholder="Ingrese el Titulo que obtuvo"
+            [(ngModel)]="modalData.title" />
+        </div>
+        <div class="form-group">
+          <label for="inputSchoolImage">Imagen</label>
+          <input type="text" class="form-control" id="inputSchoolImage"
+            placeholder="Ingrese imagen/logo de la institucion" [(ngModel)]="modalData.image" />
+        </div>
+        <div class="form-group">
+          <label for="inputCareer">Carrera</label>
+          <input type="text" class="form-control" id="inputCareer" placeholder="Ingrese la Carrera"
+            [(ngModel)]="modalData.career" />
+        </div>
+        <div class="form-group">
+          <label for="inputScore">Promedio</label>
+          <input type="number" class="form-control" id="inputScore" placeholder="Ingrese el Promedio que obtuvo"
+            [(ngModel)]="modalData.gpa" />
+        </div>
+        <div class="form-group">
+          <label for="inputSchoolInitial">Fecha Inicio</label>
+          <input type="text" class="form-control" id="inputSchoolInitial" placeholder="Ingrese la Fecha de Inicio"
+            [(ngModel)]="modalData.startDate" />
+        </div>
+        <div class="form-group">
+          <label for="inputSchoolEnd">Fecha Final</label>
+          <input type="text" class="form-control" id="inputSchoolEnd" placeholder="Ingrese la fecha de finalizacion"
+            [(ngModel)]="modalData.endDate" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button type="button" class="btn btn-primary" (click)="addNewEducationModal(person.id)">
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
