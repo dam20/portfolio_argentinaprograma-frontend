@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -6,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  
+
   @Input()
   person!: {
     id: number;
@@ -25,9 +26,19 @@ export class NavBarComponent implements OnInit {
     skills: [];
     projects: [];
   };
-  constructor() { }
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
   }
 
+  goLogin(): void {
+    this.router.navigateByUrl('/login');
+  }
+  logOut(): void {
+    sessionStorage.removeItem('currentUser');
+    this.router.navigateByUrl('/');
+  }
+  isLogged(): boolean {
+    return sessionStorage.getItem('currentUser') != null;
+  }
 }

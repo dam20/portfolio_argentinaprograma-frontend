@@ -38,8 +38,10 @@ export class HeaderComponent implements OnInit {
     position: '',
     company: '',
     location: '',
-    background: '',
-    profilePicture: '',
+    profile: {
+      background: '',
+      profilePicture: ''
+    }
   };
 
   constructor(private portfolioService: PortfolioService) { }

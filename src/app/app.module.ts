@@ -3,17 +3,21 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { NavBarComponent } from './components/profile/nav-bar/nav-bar.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { HeaderComponent } from './components/header/header.component';
-import { AboutMeComponent } from './components/about-me/about-me.component';
-import { ExperienceComponent } from './components/experience/experience.component';
-import { EducationComponent } from './components/education/education.component';
-import { SkillsComponent } from './components/skills/skills.component';
-import { ProjectsComponent } from './components/projects/projects.component';
+import { HeaderComponent } from './components/profile/header/header.component';
+import { AboutMeComponent } from './components/profile/about-me/about-me.component';
+import { ExperienceComponent } from './components/profile/experience/experience.component';
+import { EducationComponent } from './components/profile/education/education.component';
+import { SkillsComponent } from './components/profile/skills/skills.component';
+import { ProjectsComponent } from './components/profile/projects/projects.component';
+import { LoginComponent } from './components/login/login.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
+import { PortfolioService } from './service/portfolio.service';
+import { InterceptorService } from './service/interceptor.service';
 // import { PortfolioService } from './service/portfolio.service';
 
 @NgModule({
@@ -26,13 +30,16 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
     ExperienceComponent,
     EducationComponent,
     SkillsComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
     NgCircleProgressModule.forRoot({
       "radius": 80,
       "space": -10,
@@ -52,7 +59,9 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
       "responsive": false,
       "lazy": true}),
   ],
-  providers: [],
+  providers: [PortfolioService,
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

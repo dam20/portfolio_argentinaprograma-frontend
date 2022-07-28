@@ -1,0 +1,32 @@
+<form [formGroup]="form" class="m-5" (ngSubmit)="onSend($event)">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Nombre de Usuario</label>
+    <input type="username" formControlName="username" [ngClass]="{
+      'is-valid': !Username?.errors && Username?.touched,
+      'is-invalid': Username?.errors && Username?.touched
+    }" 
+    class="form-control" id="exampleInputEmail1"
+      aria-describedby="emailHelp">
+      <div *ngIf="Username?.errors && Username?.touched">
+        <p *ngIf="Username?.hasError('username')" class="text-danger">
+          El formato de nombre de usuario debe ser valido
+        </p>
+        <p *ngIf="Username?.hasError('required')" class="text-danger">
+          El nobre de usuario es Obligatorio
+        </p>
+      </div>
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+    <input type="password" formControlName="password" [ngClass]="{'is-invalid': Password?.errors && Password?.touched, 'is-valid': !Password?.errors && Password?.touched}"  class="form-control" id="exampleInputPassword1">
+    <div *ngIf="Password?.errors && Password?.touched">
+      <p *ngIf="Password?.hasError('required')" class="text-danger">
+        La Contraseña es Obligatoria.
+      </p>
+      <p *ngIf="Password?.errors?.['minlength']" class="text-danger">
+        El tamaño minimo es de 8 caracteres.
+      </p>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Iniciar</button>
+</form>

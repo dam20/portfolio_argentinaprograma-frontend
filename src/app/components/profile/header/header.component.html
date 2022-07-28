@@ -89,12 +89,12 @@
         <div class="modal-body">
           <label for="inputbackground">URL de Imagen de Fondo</label>
           <input type="text" class="form-control" id="inputbackground" placeholder="Ingrese la imagen de fondo"
-            [(ngModel)]="modalData.background" [value]="person.name" />
+            [(ngModel)]="modalData.profile.background" [value]="person.name" />
         </div>
         <div class="form-group">
           <label for="inputprofilePicture">URL de Foto de Perfil</label>
           <input type="text" class="form-control" id="inputprofilePicture" placeholder="Ingrese su foto de perfil"
-            [(ngModel)]="modalData.profilePicture" />
+            [(ngModel)]="modalData.profile.profilePicture" />
         </div>
       </div>
       <div class="modal-footer">
