@@ -7,7 +7,7 @@ import { PortfolioService } from 'src/app/service/portfolio.service';
   styleUrls: ['./education.component.css']
 })
 export class EducationComponent implements OnInit {
-
+  isLogged: boolean = false;
   defaultImage: String ='https://scientia1.files.wordpress.com/2014/02/universidad1.png';
   @Input()
   person!: {
@@ -21,6 +21,7 @@ export class EducationComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.isLogged = this.portfolioService.isLogged();
   }
 
 

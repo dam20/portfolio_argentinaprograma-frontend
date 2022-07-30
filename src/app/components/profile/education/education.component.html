@@ -2,17 +2,17 @@
   <div id="education">
     <div class="card-titles">
       <h2>Educación</h2>
-      <div class="btn-edit">
+      <div class="btn-edit" *ngIf="isLogged">
         <a class="btn-right"><i class="fa fa-plus" data-bs-toggle="modal" data-bs-target="#newEdu"></i></a>
       </div>
     </div>
     <div>
-      <ul class="items-list" id="eduList">
-        <li *ngFor="let education of person.educations">
-          <div class="card mb-3" style="max-width: 540px">
+      <div class="row row-cols-md-2">
+        <div class="col" *ngFor="let education of person.educations">
+          <div class="card mb-3">
             <div class="col container-fluid">
-              <div class="row justify-content-md-right">
-                <a class="d-flex flex-row-reverse"><i class="fa fa-minus-circle"
+              <div class="row justify-content-md-right" >
+                <a class="d-flex flex-row-reverse" *ngIf="isLogged"><i class="fa fa-minus-circle"
                     (click)="deleteEducation(person.id, education)"></i></a>
               </div>
               <div class="row container-fluid">
@@ -23,7 +23,7 @@
                   <div class="card-body">
                     <h5 class="card-title">{{ education.title }}</h5>
                     <h5 class="card-title">{{ education.school }}</h5>
-                    <h5 class="card-title">{{ education.gpa }}</h5>
+                    <!-- <h5 class="card-title">{{ education.gpa }}</h5> -->
                     <p class="card-text">
                       <small class="text-muted">Desde: {{ education.startDate }} Hasta:
                         {{ education.endDate }}</small>
@@ -33,8 +33,8 @@
               </div>
             </div>
           </div>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -52,13 +52,13 @@
       <div class="modal-body">
         <div class="form-group">
           <label for="inputSchool">Institucion</label>
-          <input type="text" class="form-control" id="inputSchool" placeholder="Ingrese Universidad/Escuela/Academia"
-            [(ngModel)]="modalData.school" />
+          <input type="text" class="form-control text-capitalize" id="inputSchool"
+            placeholder="Ingrese Universidad/Escuela/Academia" [(ngModel)]="modalData.school" />
         </div>
         <div class="form-group">
           <label for="inputTitle">Titulo</label>
-          <input type="text" class="form-control" id="inputTitle" placeholder="Ingrese el Titulo que obtuvo"
-            [(ngModel)]="modalData.title" />
+          <input type="text" class="form-control text-capitalize" id="inputTitle"
+            placeholder="Ingrese el Titulo que obtuvo" [(ngModel)]="modalData.title" />
         </div>
         <div class="form-group">
           <label for="inputSchoolImage">Imagen</label>
@@ -67,7 +67,7 @@
         </div>
         <div class="form-group">
           <label for="inputCareer">Carrera</label>
-          <input type="text" class="form-control" id="inputCareer" placeholder="Ingrese la Carrera"
+          <input type="text" class="form-control text-capitalize" id="inputCareer" placeholder="Ingrese la Carrera"
             [(ngModel)]="modalData.career" />
         </div>
         <div class="form-group">

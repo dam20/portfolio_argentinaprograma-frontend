@@ -8,6 +8,7 @@ import { PortfolioService } from 'src/app/service/portfolio.service';
 })
 export class HeaderComponent implements OnInit {
 
+  isLogged: boolean = false;
   defaultBackground: String =
     'https://microsofters.com/wp-content/uploads/2021/06/img19-scaled.jpg';
   defaultProfileImg: String =
@@ -28,29 +29,19 @@ export class HeaderComponent implements OnInit {
     experiences: [{
       position: String;
       company: String;
+      endDate: String;
     }];
-  };
-
-  modalData = {
-    birthDate: '',
-    nationality: '',
-    name: '',
-    position: '',
-    company: '',
-    location: '',
-    profile: {
-      background: '',
-      profilePicture: ''
-    }
   };
 
   constructor(private portfolioService: PortfolioService) { }
 
   ngOnInit(): void {
+    this.isLogged = this.portfolioService.isLogged();
   }
 
   editHeaderModal(id: number) {
-    const body = this.modalData;
+    const body = this.person;
+    console.log(body);
     this.portfolioService.setPersonData(id, body).subscribe((data) => {
       console.log(JSON.stringify('data' + data));
       window.location.reload();

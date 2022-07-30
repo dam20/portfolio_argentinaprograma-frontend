@@ -1,0 +1,15 @@
+.row.row-cols-md-2{
+    margin-top: 0.7rem;
+}
+.row.container-fluid{
+    align-items: center;
+}
+
+.card.mb-3{
+    max-width: 540px;
+    height: 100%;
+}
+
+.col-md-4{
+    margin: 1rem 0 1rem 0;
+}

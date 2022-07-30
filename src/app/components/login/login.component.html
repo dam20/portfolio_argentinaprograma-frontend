@@ -1,24 +1,25 @@
-<form [formGroup]="form" class="m-5" (ngSubmit)="onSend($event)">
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Nombre de Usuario</label>
-    <input type="username" formControlName="username" [ngClass]="{
-      'is-valid': !Username?.errors && Username?.touched,
-      'is-invalid': Username?.errors && Username?.touched
-    }" 
-    class="form-control" id="exampleInputEmail1"
-      aria-describedby="emailHelp">
-      <div *ngIf="Username?.errors && Username?.touched">
-        <p *ngIf="Username?.hasError('username')" class="text-danger">
-          El formato de nombre de usuario debe ser valido
-        </p>
-        <p *ngIf="Username?.hasError('required')" class="text-danger">
-          El nobre de usuario es Obligatorio
-        </p>
-      </div>
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Contraseña</label>
-    <input type="password" formControlName="password" [ngClass]="{'is-invalid': Password?.errors && Password?.touched, 'is-valid': !Password?.errors && Password?.touched}"  class="form-control" id="exampleInputPassword1">
+<div class="body">
+
+  <form [formGroup]="form" (ngSubmit)="onSend($event)" class="box">
+    <h1>Login</h1>
+    <p class="text-muted"> Por favor ingrese nombre de usuario y contraseña</p>
+
+    <input placeholder="Username" type="username" formControlName="username" [ngClass]="{
+            'is-valid': !Username?.errors && Username?.touched,
+            'is-invalid': Username?.errors && Username?.touched
+          }" class="form-control">
+    <div *ngIf="Username?.errors && Username?.touched">
+      <p *ngIf="Username?.hasError('username')" class="text-danger">
+        El formato de nombre de usuario debe ser valido
+      </p>
+      <p *ngIf="Username?.hasError('required')" class="text-danger">
+        El nobre de usuario es Obligatorio
+      </p>
+    </div>
+
+    <input type="password" formControlName="password" [ngClass]="{'is-invalid': Password?.errors && Password?.touched,
+            'is-valid': !Password?.errors && Password?.touched}" class="form-control" id="exampleInputPassword1"
+      placeholder="Password">
     <div *ngIf="Password?.errors && Password?.touched">
       <p *ngIf="Password?.hasError('required')" class="text-danger">
         La Contraseña es Obligatoria.
@@ -27,6 +28,16 @@
         El tamaño minimo es de 8 caracteres.
       </p>
     </div>
-  </div>
-  <button type="submit" class="btn btn-primary">Iniciar</button>
-</form>
+
+    <a class="forgot text-muted" href="#">Forgot password?</a>
+    <input type="submit" name="" value="Login" href="#">
+    <div class="col-md-12">
+      <ul class="social-network social-circle">
+        <li><a href="#" class="icoFacebook" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
+        <li><a href="#" class="icoTwitter" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+        <li><a href="#" class="icoGoogle" title="Google +"><i class="fab fa-google-plus"></i></a></li>
+      </ul>
+    </div>
+  </form>
+
+</div>

@@ -23,11 +23,10 @@ export class InterceptorService implements HttpInterceptor {
         }
       });
     }
-    console.log("El Servicio Interceptor esta Funcionando. " + JSON.stringify(currentUser.accessToken));
-    console.log(req?.headers);
+    //console.log("El Servicio Interceptor esta Funcionando. " + JSON.stringify(currentUser.accessToken));
+    //console.log(req?.headers);
     return next.handle(req).pipe(
       catchError((error) => {
-        console.log('Returning caught observabl');
         return throwError(error);
       })
     );

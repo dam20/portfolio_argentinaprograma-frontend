@@ -1,47 +1,8 @@
-<!--<div class="card mat-card">
-  <div class="card-titles">
-    <h2>Hard Skills & Soft Skills</h2>
-    <div class="btn-edit">
-      <a class="btn-right"><i class="fa fa-plus" data-bs-toggle="modal" data-bs-target="#newApt"></i></a>
-    </div>
-  </div>
-  <div class="card-group items-list">
-    <div class="row">
-    <div class="card" *ngFor="let skill of person.skills">
-        <!-- <div class="aptitude-info">
-        <div class="row justify-content-md-right">
-                <a class="d-flex flex-row-reverse"><i class="fa fa-minus-circle"
-                  (click)="selectItem(skill)"></i></a>
-              </div>
-          <p>
-            <br />
-            <span>{{ skill.name }}</span>
-          </p>
-          <div class="progress">
-            <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
-              style="{{ skill.knowledgeLevel }}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </a> 
-        <div class="card-img-top">
-          <circle-progress  
-                          [percent]="skill.knowledgeLevel"                           
-          ></circle-progress>
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">{{skill.name}}</h5>
-      </div>
-    </div>
-    </div>
-  </div>
-</div>-->
-
-
-
 <div class="card mat-card">
   <div id="education">
     <div class="card-titles">
       <h2>Hard Skills & Soft Skills</h2>
-      <div class="btn-edit">
+      <div class="btn-edit" *ngIf="isLogged">
         <a class="btn-right"><i class="fa fa-plus" data-bs-toggle="modal" data-bs-target="#newSkill"></i></a>
       </div>
     </div>
@@ -49,7 +10,7 @@
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
       <div class="col" *ngFor="let skill of person.skills">
         <div class="card">
-          <div class="row justify-content-md-right">
+          <div class="row justify-content-md-right" *ngIf="isLogged">
             <a class="d-flex flex-row-reverse"  ><i class="fa fa-minus-circle" data-bs-toggle="modal" data-bs-target="#delSkill" (click)="selectItem(skill)"></i></a>
           </div>
           <div class="circle-percentage">
@@ -80,7 +41,7 @@
       <div class="modal-body">
         <div class="form-group">
           <label for="inputApt">Habilidad</label>
-          <input type="text" class="form-control" id="inputApt" placeholder="Ingrese la Habilidad"
+          <input type="text" class="form-control text-capitalize" id="inputApt" placeholder="Ingrese la Habilidad"
             [(ngModel)]="modalData.name" />
         </div>
         <div class="form-group">

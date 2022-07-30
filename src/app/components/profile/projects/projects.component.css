@@ -1,0 +1,22 @@
+.mat-card{
+    margin-bottom: .7rem;
+}
+textarea.form-control {
+    min-height: calc(10rem + 0.75rem + 2px);
+}
+
+.modal-body {
+    
+    padding: 0.25rem 1rem;
+}
+
+.form-group {
+    margin-bottom: 0.5rem;
+}
+
+.project-img{
+    padding: 0.2rem 0.5rem;
+    width: 200px; 
+    height: 250px;
+    align-items: center;;
+}

@@ -7,7 +7,7 @@ import { PortfolioService } from 'src/app/service/portfolio.service';
   styleUrls: ['./skills.component.css']
 })
 export class SkillsComponent implements OnInit {
-
+  isLogged: boolean = false;
   porcent: String = 'width: 0%';
   modalData: any = {};
   myItemModal: any;
@@ -20,7 +20,7 @@ export class SkillsComponent implements OnInit {
   constructor(private portfolioService: PortfolioService) { }
 
   ngOnInit(): void {
-    
+    this.isLogged = this.portfolioService.isLogged();
   }
 
   selectItem(item: any) {
@@ -28,7 +28,7 @@ export class SkillsComponent implements OnInit {
   }
 
   addNewSkillModal(id: number) {
-    this.modalData.knowledgeLevel = 'width:' + this.modalData.knowledgeLevel.toString();
+    this.modalData.knowledgeLevel = this.modalData.knowledgeLevel.toString();
     const body = this.modalData;
     this.portfolioService.addSkill(id, body).subscribe(() => {
       window.location.reload();

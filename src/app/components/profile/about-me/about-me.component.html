@@ -1,7 +1,7 @@
 <div class="card mat-card">
   <div class="card-titles">
     <h2>Acerca de</h2>
-    <div class="btn-edit">
+    <div class="btn-edit" *ngIf="isLogged">
       <a class="btn-right"><i class="fa fa-pen" data-bs-toggle="modal" data-bs-target="#editAbout"></i></a>
     </div>
   </div>

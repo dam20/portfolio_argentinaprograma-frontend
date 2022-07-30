@@ -1,19 +1,14 @@
 <div class="card mat-card" id="first-card">
   <div id="profile-background">
-    <img id="info-back-img" [src]="
-          person.profile.background!
-            ? person.profile.background
-            : defaultBackground
+    <img id="info-back-img" [src]="person.profile.background! ? person.profile.background : defaultBackground
         " />
   </div>
   <div id="info" style="padding: 16px">
     <div id="info-img">
       <img id="info-user-img" class="profile-image" [src]="
-            person.profile.profilePicture!
-              ? person.profile.profilePicture
-              : defaultProfileImg
+            person.profile.profilePicture! ? person.profile.profilePicture : defaultProfileImg
           " />
-      <div class="btn-edit">
+      <div class="btn-edit" *ngIf="isLogged">
         <a class="btn-right"><i class="fa fa-pen" data-bs-toggle="modal" data-bs-target="#editProfile"></i></a>
       </div>
     </div>
@@ -27,9 +22,11 @@
         <h5 id="info-name">
           Nacionalidad: {{ person.nationality }}
         </h5>
-        <div>
-          <span id="info-position"> person.experiences.position </span> en
-          <span id="info-company"> person.experiences.company </span>
+        <div *ngFor="let xp of person.experiences">
+          <div *ngIf="xp.endDate=='Actualidad'">
+            <span id="info-position"> {{xp.position}} </span> en
+            <span id="info-company"> {{xp.company}} </span>
+          </div>
         </div>
         <div id="info-contact">
           <span id="info-ubication">{{ person.location }}</span>
@@ -54,49 +51,53 @@
       <div class="modal-body">
         <div class="form-group">
           <label for="inputName">Nombre</label>
-          <input type="text" class="form-control" id="inputName" placeholder="Ingrese el Nombre" [(ngModel)]="modalData.name"
-            [value]="person.name" />
+          <input type="text" class="form-control text-capitalize" id="inputName" placeholder="Ingrese el Nombre"
+            [(ngModel)]="person.name" />
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputName">Apellido</label>
+          <input type="text" class="form-control text-capitalize" id="inputSurname" placeholder="Ingrese el Apellido"
+            [(ngModel)]="person.surname" />
         </div>
       </div>
       <div class="modal-body">
         <div class="form-group">
           <label for="inputFechaNacimiento">Fecha de Nacimiento</label>
           <input type="text" class="form-control" id="inputFechaNacimiento" placeholder="Ingrese la fecha de nacimiento"
-            [(ngModel)]="modalData.birthDate" />
+            [(ngModel)]="person.birthDate" />
         </div>
       </div>
       <div class="modal-body">
         <div class="form-group">
           <label for="inputNacionalidad">Nacionalidad</label>
-          <input type="text" class="form-control" id="inputNacionalidad" placeholder="Ingrese su nacionalidad"
-            [(ngModel)]="modalData.nationality" />
+          <input type="text" class="form-control text-capitalize" id="inputNacionalidad" placeholder="Ingrese su nacionalidad"
+            [(ngModel)]="person.nationality" />
         </div>
-        <div class="modal-body">
-          <label for="inputPosition">Posición</label>
-          <input type="text" class="form-control" id="inputPosition" placeholder="Ingrese el puesto en el que se desempeña"
-            [(ngModel)]="modalData.position" />
-        </div>
-        <div class="modal-body">
-          <label for="inputCompany">Compañia</label>
-          <input type="text" class="form-control" id="inputCompany" placeholder="Ingrese la empresa"
-            [(ngModel)]="modalData.company" />
-        </div>
-        <div class="modal-body">
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
           <label for="inputUbication">Ubicación</label>
-          <input type="text" class="form-control" id="inputUbication" placeholder="Ingrese su ubicacion"
-            [(ngModel)]="modalData.location" />
+          <input type="text" class="form-control text-capitalize" id="inputUbication" placeholder="Ingrese su ubicacion"
+            [(ngModel)]="person.location" />
         </div>
-        <div class="modal-body">
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
           <label for="inputbackground">URL de Imagen de Fondo</label>
           <input type="text" class="form-control" id="inputbackground" placeholder="Ingrese la imagen de fondo"
-            [(ngModel)]="modalData.profile.background" [value]="person.name" />
+            [(ngModel)]="person.profile.background" />
         </div>
+      </div>
+      <div class="modal-body">
         <div class="form-group">
           <label for="inputprofilePicture">URL de Foto de Perfil</label>
           <input type="text" class="form-control" id="inputprofilePicture" placeholder="Ingrese su foto de perfil"
-            [(ngModel)]="modalData.profile.profilePicture" />
+            [(ngModel)]="person.profile.profilePicture" />
         </div>
       </div>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Cerrar

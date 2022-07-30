@@ -7,7 +7,7 @@ import { PortfolioService } from 'src/app/service/portfolio.service';
   styleUrls: ['./about-me.component.css']
 })
 export class AboutMeComponent implements OnInit {
-
+  isLogged: boolean = false;
   @Input()
   person!: {
     id: number;
@@ -20,6 +20,7 @@ export class AboutMeComponent implements OnInit {
   
   constructor(private portfolioService: PortfolioService) { }
   ngOnInit(): void {
+    this.isLogged = this.portfolioService.isLogged();
   }
 
   editAboutMeModal(id: number) {

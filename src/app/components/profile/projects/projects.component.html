@@ -1,31 +1,41 @@
 <div class="card mat-card">
   <div class="card-titles">
-    <h2>Proyectos</h2>
-    <div class="btn-edit">
-      <a class="btn-right"><i class="fa fa-plus" data-bs-toggle="modal" data-bs-target="#newAch"></i></a>
+    <div class="achivements">
+      <h3>{{ person.projects.length }} Proyectos</h3>
+    </div>
+
+    <div class="btn-edit" *ngIf="isLogged">
+      <a class="d-flex flex-row-reverse auth"><i class="fa fa-plus" data-bs-toggle="modal" data-bs-target="#newAch"></i></a>
     </div>
   </div>
-  <div class="achivements">
-    <h3>{{ person.projects.length }} Proyectos</h3>
-    <div>
-      <div>
-        <ul class="project-list">
-          <div class="row row-cols-4 gx-5">
-            <li *ngFor="let project of person.projects">
-              <br />
-              <div class="col">
-                <button type="button" class="btn">
-                  {{ project.name }}
-                </button>
-                <a class="btn btn-top"><i class="fa fa-minus-circle" data-bs-toggle="modal" (click)="deleteProjectModal(person.id, project)"></i></a>
-              </div>
-            </li>
+  <div>
+    <div class="row mb-2">
+      <div class="col-md-6" *ngFor="let project of person.projects">
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          <div class="col-auto d-none d-lg-flex">
+            <img class="project-img align-self-center justify-content-center"  preserveAspectRatio="xMidYMid slice" [src]="project.image">
           </div>
-        </ul>
+          <div class="col p-4 d-flex flex-column position-static">
+            <div *ngIf="isLogged">
+              <a class="d-flex flex-row-reverse auth"><i class="fa fa-minus-circle" data-bs-toggle="modal" (click)="deleteProjectModal(person.id, project)"></i></a>
+            </div>
+            <h3 class="mb-0">{{ project.name }}</h3>
+            <div [ngSwitch]="project.state">
+              <strong *ngSwitchCase="'Finalizado'" class="d-inline-block mb-2 text-success">{{project.state}}</strong>
+              <strong *ngSwitchCase="'En Desarrollo'"
+                class="d-inline-block mb-2 text-primary">{{project.state}}</strong>
+              <strong *ngSwitchCase="'Abandonado'"
+                class="d-inline-block mb-2 text-muted">{{project.state}}</strong>
+            </div>
+            <p class="mb-auto">{{project.description}}</p>
+            <a [href]="project.link" target="_blank" class="stretched-link">Visitar</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
 
 <!-- Modal Nuevos projects -->
 <div class="modal fade" id="newAch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -39,9 +49,41 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <label for="inputAch">Nombre del Proyecto</label>
-          <input type="text" class="form-control" id="inputAch" placeholder="Ingrese el Nombre del Proyecto"
-            [(ngModel)]="modalData.name" />
+          <label for="inputName">Nombre del Proyecto</label>
+          <input type="text" class="form-control text-capitalize" id="inputName"
+            placeholder="Ingrese el Nombre del Proyecto" [(ngModel)]="modalData.name" />
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputDescription">Descripcion del proyecto</label>
+          <textarea type="text" class="form-control" id="inputDescription" placeholder="Descripcion del proyecto"
+            [(ngModel)]="modalData.description" (keyup)="onKey($event)"></textarea>
+          <p class="text-muted text-end">{{counter}} caracteres restantes</p>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputAch">Estado del Proyecto</label>
+          <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" [(ngModel)]="modalData.state">
+            <option value="En Desarrollo">En Desarrollo</option>
+            <option value="Finalizado">Finalizado</option>
+            <option value="Abandonado">Abandonado</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputAch">Imagen</label>
+          <input type="text" class="form-control" id="inputAch" placeholder="Ingrese el link de la imagen del Proyecto"
+            [(ngModel)]="modalData.image" />
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputAch">Link al Proyecto</label>
+          <input type="text" class="form-control" id="inputAch" placeholder="Ingrese el link al Proyecto"
+            [(ngModel)]="modalData.link" />
         </div>
       </div>
       <div class="modal-footer">

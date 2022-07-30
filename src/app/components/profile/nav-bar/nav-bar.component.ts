@@ -36,8 +36,8 @@ export class NavBarComponent implements OnInit {
   }
   logOut(): void {
     sessionStorage.removeItem('currentUser');
-    this.router.navigateByUrl('/');
-  }
+    window.location.reload();
+    }
   isLogged(): boolean {
     return sessionStorage.getItem('currentUser') != null;
   }

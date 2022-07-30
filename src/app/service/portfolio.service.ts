@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PortfolioService {
-  url: String = 'http://localhost:8081/';
-  constructor(private http: HttpClient) { }
+  url: String = 'https://dmoyano-argentina-programa.herokuapp.com/';
+  constructor(private http: HttpClient, private authenticationService: AuthenticationService) { }
 
   getPersonData(id: number = 1): Observable<any> {
     return this.http.get<any>(this.url + 'person/' + id);
@@ -15,7 +16,7 @@ export class PortfolioService {
 
   setPersonData(id: number, body: any): Observable<any> {
     //console.log(body);
-    return this.http.post<any>(this.url + 'person/edit/header/' + id, body);
+    return this.http.post<any>(this.url + 'person/edit/' + id, body);
   }
 
   setAboutMeData(id: number, body: any): Observable<any> {
@@ -39,7 +40,6 @@ export class PortfolioService {
   }
 
   addSkill(id: number, body: any): Observable<any> {
-    alert(body);
     return this.http.post<any>(this.url + 'person/new/skill/' + id, body);
   }
 
@@ -60,4 +60,7 @@ export class PortfolioService {
     );
   }
 
+  isLogged(): boolean { 
+    return sessionStorage.getItem('currentUser') != null;
+  }
 }

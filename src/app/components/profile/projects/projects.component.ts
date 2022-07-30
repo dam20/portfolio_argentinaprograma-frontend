@@ -7,7 +7,8 @@ import { PortfolioService } from 'src/app/service/portfolio.service';
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
-
+  counter: number = 0;
+  isLogged: boolean = false;
   modalData: any = {};
 
   @Input()
@@ -18,6 +19,7 @@ export class ProjectsComponent implements OnInit {
   constructor(private portfolioService: PortfolioService) { }
 
   ngOnInit(): void {
+    this.isLogged = this.portfolioService.isLogged();
   }
 
   addNewProjectModal(id: number) {
@@ -30,4 +32,9 @@ export class ProjectsComponent implements OnInit {
       window.location.reload();
     });
   }
+  onKey(event:any): void{
+    console.log(this.modalData.description.length);
+    //this.counter = parseInt(document.getElementById("inputDescription").textContent.length);
+    this.counter = 300 - this.modalData.description.length;
+   }
 }

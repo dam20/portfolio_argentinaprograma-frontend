@@ -7,10 +7,10 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  url = "http://localhost:8081/api/auth";
+  url = "https://dmoyano-argentina-programa.herokuapp.com/api/auth";
   currentUserSubject: BehaviorSubject<any>;
   constructor(private http: HttpClient) {
-    console.log("El servicio de autenticacion esta funcionando");
+    //console.log("El servicio de autenticacion esta funcionando");
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('currentUser') || '{}'));
 
   }
