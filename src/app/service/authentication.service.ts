@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  url = "https://dmoyano-argentina-programa.herokuapp.com/api/auth";
+  url = "http://backend.dmoyano.ml/api/auth";
   currentUserSubject: BehaviorSubject<any>;
   constructor(private http: HttpClient) {
     //console.log("El servicio de autenticacion esta funcionando");

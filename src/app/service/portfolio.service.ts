@@ -7,7 +7,7 @@ import { AuthenticationService } from './authentication.service';
   providedIn: 'root',
 })
 export class PortfolioService {
-  url: String = 'https://dmoyano-argentina-programa.herokuapp.com/';
+  url: String = 'http://backend.dmoyano.ml/';
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) { }
 
   getPersonData(id: number = 1): Observable<any> {
